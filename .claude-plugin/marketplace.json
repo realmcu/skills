@@ -1,0 +1,22 @@
+{
+  "name": "realmcu-skills",
+  "owner": {
+    "name": "realmcu",
+    "email": "hellsge@qq.com"
+  },
+  "metadata": {
+    "description": "Realsil internal Agent Skills collection",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "honeygui-designer",
+      "description": "Generate HoneyGUI HML (XML-based UI markup) files for embedded devices from natural language descriptions",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/honeygui-designer"
+      ]
+    }
+  ]
+}
