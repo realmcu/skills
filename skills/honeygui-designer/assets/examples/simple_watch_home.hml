@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  示例：智能手表主页（HoneyGUI 引擎方言）· 完整文档骨架
+  演示点：最小可用文档结构 = <meta>(project+author) + <view> + 恰好一个 hg_view entry="true"；
+          hg_window 作头部容器（毛玻璃）、hg_time_label 实时时间、hg_label 文本、hg_image 图标。
+
+  ⚠️ examples 仅示范语法结构，勿照抄布局/配色/文案——请按用户需求原创设计。
+  ⚠️ 图像路径（如 assets/home_icon.png）是占位符，以 "assets/" 开头；
+     实际项目需准备资源放入 assets/，仿真/编译时扩展自动把 png 转为 bin。
+-->
+<hml>
+  <meta>
+    <project name="WatchHome" appId="com.example.watchhome"
+             resolution="454x454" pixelMode="RGB565" />
+    <author name="Developer" email="dev@example.com" />
+  </meta>
+
+  <view>
+    <hg_view id="view_home" entry="true" x="0" y="0" width="454" height="454"
+             backgroundColor="#000000">
+
+      <!-- 中心图标 -->
+      <hg_image id="img_home" x="187" y="180" width="80" height="80"
+                src="assets/home_icon.png" />
+
+      <!-- 头部容器：毛玻璃窗口，承载时间与标题 -->
+      <hg_window id="win_header" x="0" y="0" width="454" height="110"
+                 enableBlur="true" blurDegree="225">
+        <hg_time_label id="lbl_clock" x="300" y="24" width="120" height="40"
+                       timeFormat="HH:mm" fontSize="36" color="#FFFFFF"
+                       hAlign="RIGHT" fontFile="/NotoSansSC-Medium.ttf" />
+        <hg_label id="lbl_greeting" x="24" y="34" width="200" height="32"
+                  text="My Home" fontSize="22" color="#E98F36"
+                  hAlign="LEFT" fontFile="/NotoSansSC-Regular.ttf" />
+      </hg_window>
+    </hg_view>
+  </view>
+</hml>

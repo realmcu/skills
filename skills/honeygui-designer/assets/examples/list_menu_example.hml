@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  示例片段：应用菜单列表 + 视图跳转（HoneyGUI 引擎方言）
+  演示点：① hg_list（容器）只装 hg_list_item，每个 item 内放 hg_image + hg_label；
+          ② <events><event><action> 结构 + switchView 在两个 hg_view 间跳转（按键/滑动）；
+          ③ 多 view 文档中恰好一个 hg_view entry="true"，其余为可跳转的目标视图。
+
+  ⚠️ examples 仅示范语法结构，勿照抄布局/配色/文案——请按用户需求原创设计。
+  ⚠️ 图像路径（如 assets/icon_activity.png）是占位符，以 "assets/" 开头；实际项目需准备资源并放入 assets/。
+-->
+<hml>
+  <meta>
+    <project name="AppMenu" appId="com.example.appmenu"
+             resolution="454x454" pixelMode="RGB565" />
+    <author name="Developer" email="dev@example.com" />
+  </meta>
+
+  <view>
+    <!-- 入口视图：可滚动应用列表；上滑跳到详情视图 -->
+    <hg_view id="view_menu" entry="true" x="0" y="0" width="454" height="454"
+             backgroundColor="#000000">
+      <events>
+        <event type="onSwipeUp">
+          <action type="switchView" target="view_detail"
+                  switchOutStyle="SWITCH_OUT_TO_TOP_USE_TRANSLATION"
+                  switchInStyle="SWITCH_IN_FROM_BOTTOM_USE_TRANSLATION" />
+        </event>
+      </events>
+
+      <hg_list id="list_apps" x="40" y="40" width="374" height="374"
+               direction="VERTICAL" style="LIST_CLASSIC"
+               itemWidth="374" itemHeight="90" space="6"
+               noteNum="4" autoAlign="true" inertia="true" loop="false">
+
+        <hg_list_item id="row_activity" x="0" y="0" width="374" height="90">
+          <hg_image id="icon_activity" x="12" y="15" width="60" height="60" src="assets/icon_activity.png" />
+          <hg_label id="lbl_activity" x="88" y="30" width="250" height="30"
+                    text="Activity" fontSize="22" color="#FFFFFF"
+                    hAlign="LEFT" fontFile="/NotoSansSC-Regular.ttf" />
+        </hg_list_item>
+
+        <hg_list_item id="row_heart" x="0" y="0" width="374" height="90">
+          <hg_image id="icon_heart" x="12" y="15" width="60" height="60" src="assets/icon_heart.png" />
+          <hg_label id="lbl_heart" x="88" y="30" width="250" height="30"
+                    text="Heart Rate" fontSize="22" color="#FFFFFF"
+                    hAlign="LEFT" fontFile="/NotoSansSC-Regular.ttf" />
+        </hg_list_item>
+
+        <hg_list_item id="row_weather" x="0" y="0" width="374" height="90">
+          <hg_image id="icon_weather" x="12" y="15" width="60" height="60" src="assets/icon_weather.png" />
+          <hg_label id="lbl_weather" x="88" y="30" width="250" height="30"
+                    text="Weather" fontSize="22" color="#FFFFFF"
+                    hAlign="LEFT" fontFile="/NotoSansSC-Regular.ttf" />
+        </hg_list_item>
+
+        <hg_list_item id="row_music" x="0" y="0" width="374" height="90">
+          <hg_image id="icon_music" x="12" y="15" width="60" height="60" src="assets/icon_music.png" />
+          <hg_label id="lbl_music" x="88" y="30" width="250" height="30"
+                    text="Music" fontSize="22" color="#FFFFFF"
+                    hAlign="LEFT" fontFile="/NotoSansSC-Regular.ttf" />
+        </hg_list_item>
+      </hg_list>
+    </hg_view>
+
+    <!-- 目标视图：下滑返回菜单 -->
+    <hg_view id="view_detail" x="0" y="0" width="454" height="454"
+             backgroundColor="#101820">
+      <events>
+        <event type="onSwipeDown">
+          <action type="switchView" target="view_menu"
+                  switchOutStyle="SWITCH_OUT_TO_BOTTOM_USE_TRANSLATION"
+                  switchInStyle="SWITCH_IN_FROM_TOP_USE_TRANSLATION" />
+        </event>
+      </events>
+      <hg_label id="lbl_detail" x="77" y="200" width="300" height="40"
+                text="Detail Page" fontSize="26" color="#FFFFFF"
+                hAlign="CENTER" fontFile="/NotoSansSC-Medium.ttf" />
+      <hg_label id="lbl_hint" x="77" y="250" width="300" height="28"
+                text="Swipe down to go back" fontSize="15" color="#888888"
+                hAlign="CENTER" fontFile="/NotoSansSC-Regular.ttf" />
+    </hg_view>
+  </view>
+</hml>
