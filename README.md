@@ -1,4 +1,4 @@
-# Realsil Skills
+# Realtek BTSoc HMI/Display Skills
 
 一个 [Claude Agent Skills](https://agentskills.io) 集合仓库，收录 Realsil 内部与相关项目的
 Agent Skills，供支持 Skills 的 AI 工具（Claude Code、公司 AI Plugin Hub 等）扫描与使用。
