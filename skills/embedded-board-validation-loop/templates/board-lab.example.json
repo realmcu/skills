@@ -1,0 +1,55 @@
+{
+  "_usage": "Copy this template into the target project's chosen config directory and adjust project.root, which is resolved relative to the copied config file. This generic template deliberately uses manual backends; after workspace discovery, replace only the relevant backend sections with mpcli, J-Link, OpenOCD, pyOCD, DFU, vendor CLI, serial, RTT, relay, or other project-specific adapters.",
+  "project": {
+    "name": "replace-me",
+    "root": ".",
+    "work_dir": ".",
+    "data_dir": "tools/board_lab/data"
+  },
+  "build": {
+    "backend": "command",
+    "command": [
+      "REPLACE_BUILD_COMMAND"
+    ],
+    "build_dir": "build",
+    "timeout_s": 900,
+    "success_markers": [
+      "REPLACE_WITH_MARKER_EMITTED_BY_THIS_BUILD"
+    ],
+    "success_mode": "all"
+  },
+  "flash": {
+    "backend": "manual",
+    "instructions": "Replace after discovering the target's actual flash tool and artifact. Do not inherit mpcli assumptions into another platform.",
+    "timeout_s": 300
+  },
+  "reset": {
+    "backend": "manual",
+    "instructions": "Record reset/power/download-mode wiring and polarity before automating any electrical action."
+  },
+  "capture": {
+    "backend": "manual",
+    "instructions": "Replace with serial/RTT/SWO/network/file capture after discovery.",
+    "timeout_s": 120
+  },
+  "measurement": {
+    "protocol_version": 1,
+    "build_prefix": "[BENCH BUILD]",
+    "sample_prefix": "[BENCH PERF]",
+    "samples": 15,
+    "warmup": 3,
+    "primary_metric": "REPLACE_WITH_DIRECT_METRIC",
+    "higher_is_better": [],
+    "workload_keys": [
+      "REPLACE_WITH_ACTUAL_WORK_UNIT_COUNT"
+    ],
+    "fingerprint_compare_keys": [
+      "board",
+      "toolchain",
+      "build.generated_config",
+      "clock",
+      "memory.cache",
+      "workload.hash"
+    ]
+  }
+}

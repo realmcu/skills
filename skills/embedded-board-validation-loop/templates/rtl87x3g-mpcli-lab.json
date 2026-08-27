@@ -1,0 +1,116 @@
+{
+  "_usage": "Optional RTL87X3G/mpcli example. Copy into the target project's config directory, set project.root/work_dir/build_dir, discover adapter identities, verify reset polarity, and replace benchmark-specific measurement fields. It does not hard-code COM numbers or application names.",
+  "project": {
+    "name": "rtl87x3g-mpcli-board-lab",
+    "root": "REPLACE_WITH_WORKSPACE_ROOT_RELATIVE_TO_THIS_CONFIG",
+    "work_dir": "REPLACE_WITH_APPLICATION_DIRECTORY",
+    "data_dir": "tools/board_lab/data"
+  },
+  "build": {
+    "backend": "command",
+    "command": [
+      "west",
+      "build",
+      "-b",
+      "rtl87x3g_sample",
+      "REPLACE_WITH_APPLICATION_SOURCE_IF_REQUIRED",
+      "-d",
+      "{build_dir_abs}"
+    ],
+    "build_dir": "REPLACE_WITH_APPLICATION_BUILD_DIRECTORY",
+    "timeout_s": 900,
+    "success_markers": [
+      "Linking C executable",
+      "no work to do"
+    ],
+    "success_mode": "any"
+  },
+  "flash": {
+    "backend": "mpcli-marker-reset",
+    "_note": "The workspace orchestrator must own reset and pulse only during mpcli handshaking. scripts/board_lab.py only renders/runs commands and does not implement that state machine.",
+    "port": {
+      "vid": "0403",
+      "pid": "6001",
+      "serial": "DISCOVER_FLASH_LOG_ADAPTER"
+    },
+    "command": [
+      "west",
+      "flash",
+      "-d",
+      "{build_dir_abs}",
+      "--runner",
+      "mpcli",
+      "--port",
+      "{flash_port}"
+    ],
+    "timeout_s": 300,
+    "handshake_markers": [
+      "handshake request"
+    ],
+    "connected_markers": [
+      "start to loader ram patch"
+    ],
+    "success_markers": [
+      "Download : Success",
+      "MPCLI exit: success"
+    ],
+    "success_mode": "all",
+    "failure_markers": [
+      "fail to run into mp loader",
+      "receive timeout"
+    ],
+    "kill_process_names_on_timeout": true,
+    "process_names": [
+      "mpcli.exe"
+    ]
+  },
+  "reset": {
+    "backend": "serial-rts",
+    "port": {
+      "vid": "0403",
+      "pid": "6001",
+      "serial": "DISCOVER_RESET_ADAPTER"
+    },
+    "active": true,
+    "polarity_verified": "REPLACE_WITH_TRUE_AFTER_MEASUREMENT",
+    "deassert_before_open": true,
+    "dtr": false,
+    "hold_s": 0.12,
+    "retry_s": 3.0,
+    "max_pulses": 8,
+    "hold_open_through_capture": true
+  },
+  "capture": {
+    "backend": "serial",
+    "port": {
+      "vid": "0403",
+      "pid": "6001",
+      "serial": "DISCOVER_FLASH_LOG_ADAPTER"
+    },
+    "baud": "REPLACE_WITH_CONSOLE_BAUD",
+    "timeout_s": 120,
+    "shares_flash_port": true,
+    "rts": false,
+    "dtr": false
+  },
+  "measurement": {
+    "protocol_version": 1,
+    "build_prefix": "[BENCH BUILD]",
+    "sample_prefix": "[BENCH PERF]",
+    "samples": 15,
+    "warmup": 3,
+    "primary_metric": "REPLACE_WITH_DIRECT_METRIC",
+    "higher_is_better": [],
+    "workload_keys": [
+      "REPLACE_WITH_ACTUAL_WORK_UNIT_COUNT"
+    ],
+    "fingerprint_compare_keys": [
+      "board",
+      "toolchain",
+      "build.generated_config",
+      "clock",
+      "memory.cache",
+      "workload.hash"
+    ]
+  }
+}

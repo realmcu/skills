@@ -17,6 +17,15 @@
       "skills": [
         "./skills/honeygui-designer"
       ]
+    },
+    {
+      "name": "embedded-board-validation-loop",
+      "description": "Build project-specific embedded board and PC validation workflows",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/embedded-board-validation-loop"
+      ]
     }
   ]
 }
