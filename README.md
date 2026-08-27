@@ -23,6 +23,7 @@ skills/                          # 本仓库根
 | Skill | 说明 | 维护方式 |
 | --- | --- | --- |
 | [honeygui-designer](./skills/honeygui-designer/) | 根据自然语言描述生成生产级 HoneyGUI HML（嵌入式设备 UI 描述语言）文件——设计智能手表、可穿戴、IoT 界面 | **自动同步**，见下 |
+| [lcd-driver-gen](./skills/lcd-driver-gen/) | 基于已验证的同接口驱动和面板数据手册，为 Realtek display 仓库生成并注册 LCD 面板底层驱动 | 手动维护 |
 | [embedded-board-validation-loop](./skills/embedded-board-validation-loop/) | 在项目工作区建设可审计的嵌入式开发板 + PC 自动化验证闭环 | 手动维护 |
 
 ## 贡献新 skill
